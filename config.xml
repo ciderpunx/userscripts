@@ -1,0 +1,10 @@
+<UserScriptConfig>
+	<Script basedir="TwatBegone" checkRemoteUpdates="1" dependhash="da39a3ee5e6b4b0d3255bfef95601890afd80709" description="Removes twats and all mentions of them from twitter" enabled="true" filename="TwatBegone.user.js" installTime="1490810355000" modified="1490821294000" name="TwatBegone" namespace="ox4" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="4a8b8e5f-6be4-4319-b4a5-104c2b6a98c0" version="1" installurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/TwatBegone/TwatBegone.user.js" updateurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/TwatBegone/TwatBegone.user.js">
+		<Grant>none</Grant>
+		<Include>https://twitter.com/*</Include>
+	</Script>
+	<Script basedir="tester" checkRemoteUpdates="1" dependhash="da39a3ee5e6b4b0d3255bfef95601890afd80709" description="lalala" enabled="true" filename="tester.user.js" installTime="1490821452000" modified="1490821452000" name="tester" namespace="ox4" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="cadf1b53-24d7-4a7a-8be3-aada2970319a" version="1" installurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/tester/tester.user.js" updateurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/tester/tester.user.js">
+		<Grant>none</Grant>
+		<Include>*</Include>
+	</Script>
+</UserScriptConfig>
