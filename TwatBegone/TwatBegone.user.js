@@ -5,7 +5,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.22
+// @version     0.23
 // @grant       GM_getResourceText
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -71,7 +71,23 @@ function showIndicator() {
 
 // Remove twats from twitter feed
 function twatBegone() {
-  twatProcess( function(tweet) { tweet.parentNode.removeChild(tweet); });
+  tp = function() {
+    twatProcess(function(tweet) {tweet.parentNode.removeChild(tweet);})
+  };
+  // do some extra prunes after 1, 3 and 5 seconds
+  if(document.location.href=="https://twitter.com/"){
+    delayedCalls(tp);
+  }
+  tp();
+}
+
+// call a function at some set delays, to catch TL on twitter
+// 300ms, 1000..10000 step 1000
+function delayedCalls(fn) {
+  setTimeout(fn, 300);
+  for(i = 1000; i < 10000; i+=1000) {
+    setTimeout(fn, i);
+  }
 }
 
 // Replace tweet with a cat from thecatapi.com
@@ -83,17 +99,24 @@ function twatToKitteh() {
   //console.log("ttk");
 }
 
+// get current fortune server preference.
+// get template tweet text
+// get fortune using xhttprequest?
+// populate fortune with content of request
+// replace tweet with newly constructed one
+function fortune() {}
+
 // Takes a function and apply it to any tweets that match one of the current twats
 function twatProcess(action) {
-  tweets = document.getElementsByClassName("stream-item");
+  tweets = document.getElementsByClassName("js-stream-item");
 
-  for (var i=1; i<=tweets.length; i++) {
+  for (var i=0; i<=tweets.length; i++) {
    var tc = tweets[i].textContent;
    if (anyMatch(tc)) {
      action(tweets[i]);
      i--; // yes, this is disgusting
    }
-  } 
+  }
 }
 
 
