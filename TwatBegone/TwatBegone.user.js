@@ -5,7 +5,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.21
+// @version     0.22
 // @grant       GM_getResourceText
 // @grant       GM_getValue
 // @grant       GM_setValue
