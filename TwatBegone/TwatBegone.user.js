@@ -5,7 +5,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.23
+// @version     0.24
 // @grant       GM_getResourceText
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -71,23 +71,7 @@ function showIndicator() {
 
 // Remove twats from twitter feed
 function twatBegone() {
-  tp = function() {
-    twatProcess(function(tweet) {tweet.parentNode.removeChild(tweet);})
-  };
-  // do some extra prunes after 1, 3 and 5 seconds
-  if(document.location.href=="https://twitter.com/"){
-    delayedCalls(tp);
-  }
-  tp();
-}
-
-// call a function at some set delays, to catch TL on twitter
-// 300ms, 1000..10000 step 1000
-function delayedCalls(fn) {
-  setTimeout(fn, 300);
-  for(i = 1000; i < 10000; i+=1000) {
-    setTimeout(fn, i);
-  }
+  twatProcess( function(tweet) { tweet.parentNode.removeChild(tweet); }, true );
 }
 
 // Replace tweet with a cat from thecatapi.com
@@ -95,7 +79,7 @@ function delayedCalls(fn) {
 function twatToKitteh() {
   twatProcess( function(tweet) { 
     tweet.innerHTML = '<p>YES?<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a></p>'; 
-  });
+  }, true);
   //console.log("ttk");
 }
 
@@ -107,8 +91,17 @@ function twatToKitteh() {
 function fortune() {}
 
 // Takes a function and apply it to any tweets that match one of the current twats
-function twatProcess(action) {
+function twatProcess(action, firstCall) {
   tweets = document.getElementsByClassName("js-stream-item");
+
+  if(firstCall) { //&& document.location.href=="https://twitter.com/"){
+    document.body.onkeydown = function (e) {
+      if(e.keyCode==190) { // i.e. '.' for refresh
+        twatProcess(action, false );
+      }
+    }
+    delayedCalls(function(){twatProcess(action)}, false);
+  }
 
   for (var i=0; i<=tweets.length; i++) {
    var tc = tweets[i].textContent;
@@ -117,6 +110,13 @@ function twatProcess(action) {
      i--; // yes, this is disgusting
    }
   }
+}
+
+// call a function at some set delays, to catch TL on twitter
+// 300ms, 1000.. step 1000
+function delayedCalls(fn) {
+  setTimeout(fn, 300); // for really fast connections
+  setInterval(fn, 1000);
 }
 
 
