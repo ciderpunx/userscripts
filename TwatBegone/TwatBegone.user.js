@@ -5,14 +5,18 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.2
+// @version     0.21
 // @grant       GM_getResourceText
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
 // ==/UserScript==
 
-defaultTwats = ["realDonaldTrump","Nigel_Farage"];
+defaultTwats = [ "realDonaldTrump"
+               , "Nigel_Farage"
+               , "KTHopkins"
+               , "piersmorgan"
+               ];
 
 if(   document.location.href=="https://twitter.com/?twatconf"
    || document.location.href=="https://twitter.com/?twatconf#" ) {
