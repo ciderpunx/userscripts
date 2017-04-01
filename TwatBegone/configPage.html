@@ -4,19 +4,46 @@
 <head>
     <meta name="keywords"    content="Twat, Be, Gone!" />
     <meta name="author"      content="Charlie Harvey" />
-		<meta name="description" content="Config page for TwatBegone Greasemonkey/tampermonkey script" />
-		<meta name="generator"   content="vim" />
+    <meta name="description" content="Config page for TwatBegone Greasemonkey/tampermonkey script" />
+    <meta name="generator"   content="vim" />
     <title>TwatBegone: Configuration</title>
+    <style type="text/css">
+      html, body { font: 18px/1.3 normal freesans, helvetica, arial, sans-serif;}
+      #submit {background-color: #f00; border: none; padding: 5px; color: #fff; font-weight: 900; border-radius: 5px;}
+      #submit:hover {background-color: #900}
+    </style>
 </head>
 
 <body>
+  <p><a href="https://twitter.com">&laquo; Back to the Twitters</a></p>
   <h1>TwatBegone configuration page</h1>
+  <p>Here you can configure TwatBegone. Right now you just add a list of Twats
+     to the box and click "update settings". Eventually you&#8217;ll be able
+     to decide what action to take with tweets. For now TwatBegone just
+     removes them from Twitter.</p>
   <form target="#" method="GET" id="settingsForm">
     <p>
       <label for="twats">Twats</label><br />
-      <textarea style="width:90%;max-width:80em;height:21em" name="twats" id="twats"></textarea><br/>
+      <textarea style="width:90%;max-width:40em;height:21em" name="twats" id="twats"></textarea><br/>
 
+      <label for="action">Action</label><br />
+      <em>Not implemented yet <a id="showUnimplemented" href="#" onClick="return false;">Show me anyway, I&#8217;m nosy</a></em>
+
+      <div id="unimplemented" style="display:none">
+        <select name="action" id="action">
+          <option value="Remove twats" selected="selected">Remove twats</option>
+          <option value="FortuneACM">Fortune &mdash; ACM</option>
+          <option value="FortuneUploadBeta">Fortune &mdash; UploadBeta</option>
+          <option value="FortuneHappyUKGo">Fortune &mdash; HappyUKGo</option>
+          <option value="Fake Tweet">Fake Tweet</option>
+          <option value="Kitteh">Kitten</option>
+          <option value>
+        </select>
+        <br />
+      </div>
+      <br />
       <input type="submit" value="Update settings" id="submit" />
+
     </p>
   </form>
 </body>

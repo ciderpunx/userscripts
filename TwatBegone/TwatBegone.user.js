@@ -1,5 +1,7 @@
 // ==UserScript==
 // @name        TwatBegone
+// @author      Charlie Harvey
+// @author      Graham Gillions
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
@@ -12,7 +14,8 @@
 
 defaultTwats = ["realDonaldTrump","Nigel_Farage"];
 
-if(document.location.href=="https://twitter.com/?twatconf") {
+if(   document.location.href=="https://twitter.com/?twatconf"
+   || document.location.href=="https://twitter.com/?twatconf#" ) {
   showConfigPage();
 }
 else {
@@ -25,6 +28,7 @@ function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
   initTwats();
   addSubmitListener();
+  addShowUnimplementedListener();
 }
 
 function initTwats() {
@@ -37,8 +41,15 @@ function addSubmitListener() {
   document.getElementById("submit").addEventListener('click',updateSettings,false);
 }
 
+function addShowUnimplementedListener() {
+  document.getElementById("showUnimplemented").addEventListener(
+      'click'
+      , function() { document.getElementById('unimplemented').style.display = 'inline'; }
+      , false
+  );
+}
+
 function setTwats(twats){
-  console.log("attempt to set twats to" + twats);
   GM_setValue("twats",twats);
 }
 
@@ -65,8 +76,7 @@ function twatToKitteh() {
   twatProcess( function(tweet) { 
     tweet.innerHTML = '<p>YES?<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a></p>'; 
   });
-  console.log("ttk");
-
+  //console.log("ttk");
 }
 
 // Takes a function and apply it to any tweets that match one of the current twats
