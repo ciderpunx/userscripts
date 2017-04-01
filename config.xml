@@ -1,9 +1,13 @@
 <UserScriptConfig>
-	<Script basedir="TwatBegone" checkRemoteUpdates="1" dependhash="7c0fd17ef90ebdae422f69b8477fd228461b3bae" description="Removes twats and all mentions of them from twitter" enabled="true" filename="TwatBegone.user.js" installTime="1490810355000" modified="1490989864000" name="TwatBegone" namespace="ox4" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="4a8b8e5f-6be4-4319-b4a5-104c2b6a98c0" version="0.1" installurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/TwatBegone/TwatBegone.user.js" updateurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/TwatBegone/TwatBegone.user.js">
+	<Script basedir="TwatBegone" checkRemoteUpdates="1" dependhash="7c0fd17ef90ebdae422f69b8477fd228461b3bae" description="Removes twats and all mentions of them from twitter" enabled="true" filename="TwatBegone.user.js" installTime="1490810355000" modified="1491035001000" name="TwatBegone" namespace="ox4" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="4a8b8e5f-6be4-4319-b4a5-104c2b6a98c0" version="0.1" installurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/TwatBegone/TwatBegone.user.js" updateurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/TwatBegone/TwatBegone.user.js">
 		<Grant>GM_getResourceText</Grant>
 		<Grant>GM_getValue</Grant>
 		<Grant>GM_setValue</Grant>
 		<Include>https://twitter.com/*</Include>
 		<Resource name="configPage8" filename="configPage-1.html" mimetype="text/plain" charset="utf-8"/>
+	</Script>
+	<Script basedir="lalala" checkRemoteUpdates="1" dependhash="da39a3ee5e6b4b0d3255bfef95601890afd80709" description="change the background" enabled="false" filename="lalala.user.js" installTime="1490990162000" modified="1490990223000" name="lalala" namespace="ox4" noframes="false" runAt="document-end" updateMetaStatus="unknown" uuid="0b1d7c85-5690-4e64-b7ed-079a9dfe06ad" version="1" installurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/lalala/lalala.user.js" updateurl="file:///home/charlie/.mozilla/firefox/l25em0m2.default/gm_scripts/lalala/lalala.user.js">
+		<Grant>none</Grant>
+		<Include>https://newint.org/</Include>
 	</Script>
 </UserScriptConfig>

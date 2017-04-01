@@ -7,7 +7,7 @@
 // @grant       GM_getResourceText
 // @grant       GM_getValue
 // @grant       GM_setValue
-// @resource    configPage8 https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
+// @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
 // ==/UserScript==
 
 defaultTwats = ["realDonaldTrump","Nigel_Farage"];
@@ -22,7 +22,7 @@ else {
 }
 
 function showConfigPage() {
-  document.documentElement.innerHTML = GM_getResourceText("configPage8");
+  document.documentElement.innerHTML = GM_getResourceText("configPage");
   initTwats();
   addSubmitListener();
 }
