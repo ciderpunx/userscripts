@@ -5,34 +5,51 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.24
+// @version     0.25
 // @grant       GM_getResourceText
+// @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
+// @resource    kittehs https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/kittehs.txt
 // ==/UserScript==
 
-defaultTwats = [ "realDonaldTrump"
+var defaultTwats = [ "realDonaldTrump"
                , "Nigel_Farage"
                , "KTHopkins"
                , "piersmorgan"
                ];
 
+var kittehs = GM_getResourceText("kittehs").split("\n");
+
 if(   document.location.href=="https://twitter.com/?twatconf"
    || document.location.href=="https://twitter.com/?twatconf#" ) {
   showConfigPage();
+  initTwats();
+  initAction();
 }
 else {
   showIndicator();
-  twatBegone();
+  action = GM_getValue("action", "TwatBegone");
+  if (action=="TwatBegone") {
+    twatBegone();
+  }
+  else if (action=="Fortune") {
+    twatFortune();
+  }
   //twatToKitteh();
 }
 
 function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
-  initTwats();
   addSubmitListener();
-  addShowUnimplementedListener();
+  //addShowUnimplementedListener();
+}
+
+function initAction() {
+  action = GM_getValue("action", "TwatBegone");
+  document.getElementById('action').value = action;
+  setAction(action);
 }
 
 function initTwats() {
@@ -57,8 +74,13 @@ function setTwats(twats){
   GM_setValue("twats",twats);
 }
 
+function setAction(action){
+  GM_setValue("action",action);
+}
+
 function updateSettings() {
    setTwats(document.getElementById('twats').value);
+   setAction(document.getElementById('action').value);
 }
 
 // Makes a little fixed div at the bottom left with a link to the config page
@@ -71,27 +93,45 @@ function showIndicator() {
 
 // Remove twats from twitter feed
 function twatBegone() {
-  twatProcess( function(tweet) { tweet.parentNode.removeChild(tweet); }, true );
+  twatProcess( function(tweet) { tweet.parentNode.removeChild(tweet); }, true, true );
 }
 
 // Replace tweet with a cat from thecatapi.com
-// TODO: waiting to see if this will work as I'd like
+// For some reason images do not work if they originate at a non-twitter domain
 function twatToKitteh() {
-  twatProcess( function(tweet) { 
-    tweet.innerHTML = '<p>YES?<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a></p>'; 
+  twatProcess( function(tweet) {
+    mahKitteh = kittehs[Math.floor(Math.random() * kittehs.length)];
+    tweet.innerHTML = '<p><em>The URL is <br />"' + mahKitteh + '"</em><br /><img src="' + mahKitteh + '" alt="kitteh"></p>'; 
   }, true);
-  //console.log("ttk");
 }
 
-// get current fortune server preference.
-// get template tweet text
-// get fortune using xhttprequest?
-// populate fortune with content of request
-// replace tweet with newly constructed one
-function fortune() {}
+function twatFortune() {
+    fortuneServerURL = "https://helloacm.com/api/fortune/";
+    twatProcess (function(tweet) {
+      fortune = "cannot load fortune";
+      console.log(tweet);
+      GM_xmlhttpRequest({
+        method: "GET",
+        url: fortuneServerURL,
+        timeout: 800,
+        onload: function(response) {
+          fortune = response.responseText
+                            .replace(/["]/g,'')
+                            .replace(/\\n/g,'<br />')
+                            .replace(/\\t/g,' &nbsp; &nbsp;')
+                            .replace(/\\/g,'');
+          tweet.innerHTML = [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
+                            , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
+                            , '<span style="color:#657786">Here is your fortune instead.</span></p>'
+                            , '<p style="margin-left:70px">' + fortune + "</p>"
+                            ].join('');
+        }
+      })
+    }, true);
+}
 
 // Takes a function and apply it to any tweets that match one of the current twats
-function twatProcess(action, firstCall) {
+function twatProcess(action, firstCall, destructiveUpdate) {
   tweets = document.getElementsByClassName("js-stream-item");
 
   if(firstCall) { //&& document.location.href=="https://twitter.com/"){
@@ -103,11 +143,13 @@ function twatProcess(action, firstCall) {
     delayedCalls(function(){twatProcess(action)}, false);
   }
 
-  for (var i=0; i<=tweets.length; i++) {
+  for (var i=1; i<=tweets.length; i++) {
    var tc = tweets[i].textContent;
    if (anyMatch(tc)) {
      action(tweets[i]);
-     i--; // yes, this is disgusting
+     if(destructiveUpdate) {
+      i--; // yes, this is disgusting
+     }
    }
   }
 }
@@ -119,7 +161,7 @@ function delayedCalls(fn) {
   setInterval(fn, 1000);
 }
 
-
+// Check text content doesn't contain any mentions of twats
 function anyMatch(tc) {
   twats = GM_getValue("twats", defaultTwats.join("\n")).split("\n");
   for(var i=0;i<twats.length;i++) {

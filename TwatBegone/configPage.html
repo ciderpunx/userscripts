@@ -17,30 +17,22 @@
 <body>
   <p><a href="https://twitter.com">&laquo; Back to the Twitters</a></p>
   <h1>TwatBegone configuration page</h1>
-  <p>Here you can configure TwatBegone. Right now you just add a list of Twats
-     to the box and click "update settings". Eventually you&#8217;ll be able
-     to decide what action to take with tweets. For now TwatBegone just
-     removes them from Twitter.</p>
+  <p>Here you can configure TwatBegone. Add a list of twats
+     to the box, decide what action to take with their tweets.
+     Removing all tweets or replacing them with random quotes are the options right now. More are planned.</p>
   <form target="#" method="GET" id="settingsForm">
     <p>
       <label for="twats">Twats</label><br />
       <textarea style="width:90%;max-width:40em;height:21em" name="twats" id="twats"></textarea><br/>
 
       <label for="action">Action</label><br />
-      <em>Not implemented yet <a id="showUnimplemented" href="#" onClick="return false;">Show me anyway, I&#8217;m nosy</a></em>
-
-      <div id="unimplemented" style="display:none">
-        <select name="action" id="action">
-          <option value="Remove twats" selected="selected">Remove twats</option>
-          <option value="FortuneACM">Fortune &mdash; ACM</option>
-          <option value="FortuneUploadBeta">Fortune &mdash; UploadBeta</option>
-          <option value="FortuneHappyUKGo">Fortune &mdash; HappyUKGo</option>
-          <option value="Fake Tweet">Fake Tweet</option>
-          <option value="Kitteh">Kitten</option>
-          <option value>
-        </select>
-        <br />
-      </div>
+      <select name="action" id="action">
+        <option value="TwatBegone" selected="selected">Remove twats</option>
+        <option value="Fortune">Show a random quote</option>
+        <!--option value="Fake Tweet">Fake Tweet</option-->
+        <!--option value="Kitteh">Kitten</option-->
+      </select>
+      <br />
       <br />
       <input type="submit" value="Update settings" id="submit" />
 
