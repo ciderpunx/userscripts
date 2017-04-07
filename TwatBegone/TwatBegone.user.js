@@ -5,7 +5,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.25
+// @version     0.26
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -121,6 +121,7 @@ function twatFortune() {
                             .replace(/\\t/g,' &nbsp; &nbsp;')
                             .replace(/\\/g,'');
           tweet.innerHTML = [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
+                            , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
                             , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
                             , '<span style="color:#657786">Here is your fortune instead.</span></p>'
                             , '<p style="margin-left:70px">' + fortune + "</p>"
