@@ -5,7 +5,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.26
+// @version     0.27
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -86,8 +86,8 @@ function updateSettings() {
 // Makes a little fixed div at the bottom left with a link to the config page
 function showIndicator() {
   var divv = document.createElement('div');
-  divv.innerHTML = '<a href="https://twitter.com/?twatconf" style="color:#fff">TwatBegone Active</a>';
-  divv.style.cssText = 'position:fixed;width:10em;height:2em;text-align:center;z-index:100;background:#f00;line-height:2em;left:0;bottom:0;font-family:freesans, helvetica, arial, sans-serif;';
+  divv.innerHTML = '<img style="float:left;height:25px;padding-top:2px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_normal.jpg" /><a href="https://twitter.com/?twatconf" style="color:#fff">TwatBegone Active</a>';
+  divv.style.cssText = 'position:fixed;width:155px;height:2em;text-align:center;z-index:100;background:#f00;line-height:2em;left:0;bottom:0;font-family:freesans, helvetica, arial, sans-serif;';
   document.getElementById('page-outer').appendChild(divv);
 }
 

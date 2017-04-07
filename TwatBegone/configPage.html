@@ -14,8 +14,9 @@
     </style>
 </head>
 
-<body>
+<body style="max-width:40em">
   <p><a href="https://twitter.com">&laquo; Back to the Twitters</a></p>
+  <img style="float:right;width:8em;margin-left:1em;padding-top:0.86em" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz.jpg" alt="our corporate brand" />
   <h1>TwatBegone configuration page</h1>
   <p>Here you can configure TwatBegone. Add a list of twats
      to the box, decide what action to take with their tweets.
@@ -23,7 +24,7 @@
   <form target="#" method="GET" id="settingsForm">
     <p>
       <label for="twats">Twats</label><br />
-      <textarea style="width:90%;max-width:40em;height:21em" name="twats" id="twats"></textarea><br/>
+      <textarea style="width:100%;max-width:60em;height:21em" name="twats" id="twats"></textarea><br/>
 
       <label for="action">Action</label><br />
       <select name="action" id="action">
@@ -35,7 +36,6 @@
       <br />
       <br />
       <input type="submit" value="Update settings" id="submit" />
-
     </p>
   </form>
 </body>
