@@ -4,7 +4,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.42
+// @version     0.43
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -37,7 +37,8 @@ if(   document.location.href=="https://twitter.com/?twatconf"
   initAction();
 }
 else {
-  showIndicator();
+  window.addEventListener('load', showIndicator, false);
+  //showIndicator();
   var action = GM_getValue("action", "TwatBegone");
   if (action=="Fortune") {
     twatFortune();
