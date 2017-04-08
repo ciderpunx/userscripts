@@ -4,7 +4,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.43
+// @version     0.44
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -12,6 +12,7 @@
 // @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
 // @resource    kittehs https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/kittehs.txt
 // @resource    haiku https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt
+// @connect     helloacm.com
 // ==/UserScript==
 
 var defaultTwats = [ "realDonaldTrump"
