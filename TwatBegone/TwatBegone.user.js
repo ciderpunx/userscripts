@@ -4,7 +4,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.44
+// @version     0.45
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -31,8 +31,9 @@ var fortuneServerTimeout = 800;
 
 var bsString = 'This tweet was bullshit.';
 
-if(   document.location.href=="https://twitter.com/?twatconf"
-   || document.location.href=="https://twitter.com/?twatconf#" ) {
+if(   document.location.href.indexOf("https://twitter.com/?twatconf") > -1
+   || document.location.href.indexOf("https://twitter.com/?twats=") > -1
+   ) {
   showConfigPage();
   initTwats();
   initAction();
