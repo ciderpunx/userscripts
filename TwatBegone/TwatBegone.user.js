@@ -4,7 +4,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.41
+// @version     0.42
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -177,11 +177,13 @@ function twatProcess(action, firstCall, destructiveUpdate) {
   }
 
   for (var i=0; i<=tweets.length; i++) {
-   var tc = tweets[i].textContent;
-   if (anyMatch(tc)) {
-     action(tweets[i]);
-     if(destructiveUpdate) {
-      i--; // yes, this is disgusting
+   if (typeof tweets[i] !== 'undefined') {
+     var tc = tweets[i].textContent;
+     if (anyMatch(tc)) {
+       action(tweets[i]);
+       if(destructiveUpdate) {
+        i--; // yes, this is disgusting
+       }
      }
    }
   }
