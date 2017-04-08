@@ -4,7 +4,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.4
+// @version     0.41
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -115,7 +115,7 @@ function twatToKitteh() {
     var mahKitteh = kittehs[Math.floor(Math.random() * kittehs.length)];
     tweet.innerHTML =
       textTweet( 'Here&#8217;s a <a href="' + mahKitteh + '">kitten gif</a> instead.'
-               , '<br /><video style="height:400px;width:500px" type="video/mp4" controls="controls" src="' + mahKitteh + '" alt="kitteh" />'
+               , '<br /><video height="400" width="500" loop="loop" type="video/mp4" controls="controls" src="' + mahKitteh + '" alt="kitteh" />'
 
                );
   }, true);
