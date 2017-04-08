@@ -4,14 +4,14 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.3
+// @version     0.31
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
 // @resource    kittehs https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/kittehs.txt
-// @resource    words https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt
+// @resource    haiku https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt
 // ==/UserScript==
 
 var defaultTwats = [ "realDonaldTrump"
@@ -21,6 +21,8 @@ var defaultTwats = [ "realDonaldTrump"
                ];
 
 var kittehs = GM_getResourceText("kittehs").split("\n");
+
+var haikuWords = GM_getResourceText("haiku").split(/\s+/);
 
 if(   document.location.href=="https://twitter.com/?twatconf"
    || document.location.href=="https://twitter.com/?twatconf#" ) {
@@ -149,7 +151,7 @@ function twatHaiku() {
       tweet.innerHTML = [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
                             , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
                             , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
-                            , '<span style="color:#657786">Here is a haiku composed using <a href="https://github.com/first20hours/google-10000-english">some common words</a>.</span></p>'
+                            , '<span style="color:#657786">Here&#8217;s a haiku made of words from <a href="https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt">these ones</a>.</span></p>'
                             , '<p style="margin-left:70px">' + haiku + "</p>"
                             ].join('');
     }, true);
@@ -257,13 +259,12 @@ function syllable(word) {
 
 
 function getWordOfSyllables(x) {
-  var words = GM_getResourceText("words").split("\n");
-  var offset = Math.floor(Math.random() * words.length);
-  while(words[offset]!="" && syllable(words[offset])!=x) {
+  var offset = Math.floor(Math.random() * haikuWords.length);
+  while(haikuWords[offset]!="" && syllable(haikuWords[offset])!=x) {
     offset++;
-    if(offset>words.length-1) {offset=0}
+    if(offset>haikuWords.length-1) {offset=0}
   }
-  return words[offset];
+  return haikuWords[offset];
 }
 
 function makeLine(n) {
