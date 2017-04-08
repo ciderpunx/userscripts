@@ -118,7 +118,6 @@ function twatToKitteh() {
   }, true);
 }
 
-// TODO: the text part of haiku and fortune look very the same, should refactor.
 function twatFortune() {
     fortuneServerURL = "https://helloacm.com/api/fortune/";
     twatProcess (function(tweet) {
@@ -133,12 +132,7 @@ function twatFortune() {
                             .replace(/\\n/g,'<br />')
                             .replace(/\\t/g,' &nbsp; &nbsp;')
                             .replace(/\\/g,'');
-          tweet.innerHTML = [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
-                            , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
-                            , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
-                            , '<span style="color:#657786">Here is your fortune instead.</span></p>'
-                            , '<p style="margin-left:70px">' + fortune + "</p>"
-                            ].join('');
+          tweet.innerHTML = textTweet('Here is your fortune instead.', fortune)
         }
       })
     }, true);
@@ -148,13 +142,21 @@ function twatHaiku() {
     twatProcess (function(tweet) {
       haiku = "cannot compose haiku";
       haiku = makeHaiku();
-      tweet.innerHTML = [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
+      tweet.innerHTML =
+          textTweet( 'Here&#8217;s a haiku made of words from <a href="https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt">these ones</a>.'
+                   , haiku
+          )
+      ;
+    }, true);
+}
+
+function textTweet(title, txt) {
+      return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
                             , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
                             , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
-                            , '<span style="color:#657786">Here&#8217;s a haiku made of words from <a href="https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt">these ones</a>.</span></p>'
-                            , '<p style="margin-left:70px">' + haiku + "</p>"
+                            , '<span style="color:#657786">' + title + '</span></p>'
+                            , '<p style="margin-left:70px">' + txt + "</p>"
                             ].join('');
-    }, true);
 }
 
 // Takes a function and apply it to any tweets that match one of the current twats
