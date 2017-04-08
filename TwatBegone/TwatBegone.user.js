@@ -152,11 +152,11 @@ function twatHaiku() {
 
 function textTweet(title, txt) {
       return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
-                            , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
-                            , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
-                            , '<span style="color:#657786">' + title + '</span></p>'
-                            , '<p style="margin-left:70px">' + txt + "</p>"
-                            ].join('');
+             , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
+             , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
+             , '<span style="color:#657786">' + title + '</span></p>'
+             , '<p style="margin-left:70px">' + txt + "</p>"
+             ].join('');
 }
 
 // Takes a function and apply it to any tweets that match one of the current twats
