@@ -4,7 +4,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.32
+// @version     0.4
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -28,6 +28,8 @@ var fortuneServerURL = "https://helloacm.com/api/fortune/";
 
 var fortuneServerTimeout = 800;
 
+var bsString = 'This tweet was bullshit.';
+
 if(   document.location.href=="https://twitter.com/?twatconf"
    || document.location.href=="https://twitter.com/?twatconf#" ) {
   showConfigPage();
@@ -37,16 +39,18 @@ if(   document.location.href=="https://twitter.com/?twatconf"
 else {
   showIndicator();
   var action = GM_getValue("action", "TwatBegone");
-  if (action=="TwatBegone") {
-    twatBegone();
-  }
-  else if (action=="Fortune") {
+  if (action=="Fortune") {
     twatFortune();
   }
   else if (action=="Haiku") {
     twatHaiku();
   }
-  //twatToKitteh();
+  else if (action=="Kitten") {
+    twatToKitteh();
+  }
+  else {
+    twatBegone();
+  }
 }
 
 function showConfigPage() {
@@ -73,6 +77,7 @@ function setTwats(twats){
   GM_setValue("twats",cleanTwats(twats));
 }
 
+// Given a string of twats, 1 per line, filter out any empty lines
 function cleanTwats(twats) {
   return twats.split("\n").filter(nonempty).join("\n")
 }
@@ -104,12 +109,15 @@ function twatBegone() {
   twatProcess( function(tweet) { tweet.parentNode.removeChild(tweet); }, true, true );
 }
 
-// Action: Replace tweet with a cat from thecatapi.com
-// TODO: For some reason images do not work if they originate at a non-twitter domain
+// Action: Replace tweet with a cat gif
 function twatToKitteh() {
   twatProcess( function(tweet) {
     var mahKitteh = kittehs[Math.floor(Math.random() * kittehs.length)];
-    tweet.innerHTML = '<p><em>The URL is <br />"' + mahKitteh + '"</em><br /><img src="' + mahKitteh + '" alt="kitteh"></p>'; 
+    tweet.innerHTML =
+      textTweet( 'Here&#8217;s a <a href="' + mahKitteh + '">kitten gif</a> instead.'
+               , '<br /><video style="height:400px;width:500px" type="video/mp4" controls="controls" src="' + mahKitteh + '" alt="kitteh" />'
+
+               );
   }, true);
 }
 
@@ -149,7 +157,7 @@ function twatHaiku() {
 function textTweet(title, txt) {
       return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
              , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
-             , '<p style="margin-left:70px"><strong>This tweet was bullshit.</strong> '
+             , '<p style="margin-left:70px"><strong>' + bsString + '</strong> '
              , '<span style="color:#657786">' + title + '</span></p>'
              , '<p style="margin-left:70px">' + txt + "</p>"
              ].join('');
@@ -198,9 +206,43 @@ function anyMatch(tc) {
   return false;
 }
 
-// false if a string is empty, true otherwise
 function nonempty(xs) {
   return !(/^\s*$/.test(xs));
+}
+
+// Make a 5-7-5 syllable(ish) haiku
+function makeHaiku() {
+  return makeLine(5)
+       + "<br />\n"
+       + makeLine(7)
+       + "<br />\n"
+       + makeLine(5);
+}
+
+// Make a line of n syllables
+function makeLine(n) {
+  if(n<1) {
+    return '';
+  }
+  var m = 1 + Math.floor(Math.random() * (n-1));
+  var word = getWordOfSyllables(m);
+  ws = [];
+  if((n-m)>0) {
+    ws = makeLine(n-m);
+  }
+  return word + " " + ws;
+}
+
+// Find a word with x syllables in it
+function getWordOfSyllables(x) {
+  var offset = Math.floor(Math.random() * haikuWords.length);
+  while(haikuWords[offset]!="" && syllable(haikuWords[offset])!=x) {
+    offset++;
+    if(offset>haikuWords.length-1) {
+      offset=0;
+    }
+  }
+  return haikuWords[offset];
 }
 
 // Syllable counting machinery based on Perl's Lingua::EN:Syllable
@@ -244,42 +286,23 @@ function syllable(word) {
       scrugg.shift();
     }
     for (var i=0; i<subSyl.length; i++) {
-      if(word.match(new RegExp(subSyl[i]))) { syl--; }
+      if(word.match(new RegExp(subSyl[i]))) {
+        syl--;
+      }
     }
     for(var i=0; i<addSyl.length; i++) {
-      if(word.match(new RegExp(addSyl[i]))) { syl++; }
+      if(word.match(new RegExp(addSyl[i]))) {
+        syl++;
+      }
     }
-    if (word.length==1) { syl++ }
+    if (word.length==1) {
+      syl++;
+    }
     // count vowel groupings
     syl += scrugg.length;
-    if (syl==0) { syl=1; }
+    if (syl==0) {
+      syl=1;
+    }
     return syl;
 }
 
-
-// find a word with x syllables in it
-function getWordOfSyllables(x) {
-  var offset = Math.floor(Math.random() * haikuWords.length);
-  while(haikuWords[offset]!="" && syllable(haikuWords[offset])!=x) {
-    offset++;
-    if(offset>haikuWords.length-1) {offset=0}
-  }
-  return haikuWords[offset];
-}
-
-// make a line of n syllables
-function makeLine(n) {
-  if(n<1) {return '';}
-  var m = 1 + Math.floor(Math.random() * (n-1));
-  var word = getWordOfSyllables(m);
-  ws = [];
-  if((n-m)>0) {
-    ws = makeLine(n-m);
-  }
-  return word + " " + ws;
-}
-
-// make a 5-7-5 syllable(ish) haiku
-function makeHaiku() {
-  return makeLine(5) + "<br />\n" + makeLine(7) + "<br />\n" + makeLine(5);
-}
