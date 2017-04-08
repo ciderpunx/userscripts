@@ -281,8 +281,5 @@ function makeLine(n) {
 }
 
 function makeHaiku() {
-  var l1 = makeLine(5);
-  var l2 = makeLine(7);
-  var l3 = makeLine(5);
-  return l1 + "<br />\n" + l2 + "<br />\n" + l3;
+  return makeLine(5) + "<br />\n" + makeLine(7) + "<br />\n" + makeLine(5);
 }
