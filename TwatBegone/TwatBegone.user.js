@@ -115,7 +115,7 @@ function updateSettings() {
 // Makes a little fixed div at the bottom right with a link to the config page, so ppl know TwatBegone is running
 function showIndicator() {
   var divv = document.createElement('div');
-  divv.innerHTML = '<img style="float:left;height:25px;padding-top:2px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_normal.jpg" /><a href="https://twitter.com/?twatconf" style="color:#fff">TwatBegone Active</a>';
+  divv.innerHTML = '<img style="float:left;height:25px;padding-top:2px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_normal.jpg" title="Configure TwatBegone" /><a href="https://twitter.com/?twatconf" style="color:#fff">TwatBegone Active</a>';
   divv.style.cssText = 'position:fixed;width:155px;height:2em;text-align:center;z-index:100;background:#f00;line-height:2em;right:0;bottom:0;font-family:freesans, helvetica, arial, sans-serif;';
   document.getElementById('page-outer').appendChild(divv);
 }
