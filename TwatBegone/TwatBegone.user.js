@@ -10,7 +10,7 @@
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @grant       GM_addStyle
-// @resource    configPage https://raw.githubusercontent.com/oxguin/userscripts/master/TwatBegone/configPage.html
+// @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
 // @resource    helpPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/helpPage.html
 // @resource    css https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/style.css
 // @resource    kittehs https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/kittehs.txt
