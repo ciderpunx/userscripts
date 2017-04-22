@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta name="keywords"    content="Twat, Be, Gone!" />
+    <meta name="author"      content="Charlie Harvey and Graham Gillions" />
+    <meta name="description" content="Help page for TwatBegone Greasemonkey/tampermonkey script" />
+    <meta name="generator"   content="vim" />
+    <title>TwatBegone: Configuration</title>
+    <style type="text/css">
+      html, body { font: 18px/1.3 normal freesans, helvetica, arial, sans-serif;}
+      h1 {font: 26px;}
+      h2 {font: 20px;}
+      #submit {background-color: #f00; border: none; padding: 5px; color: #fff; font-weight: 900; border-radius: 5px;}
+      #submit:hover {background-color: #900}
+    </style>
+</head>
+<body>
+  <h1>TwatBegone Help</h1>
+  <p>TwatBegone uses JavaScript. If JavaScript is not enabled in your browers, twats will not begone.</p>
+  <h2>Twats</h2>
+  <p>This part works by matching any part of the tweet &mdash; who it&#8217;s from or the main text &mdash; with the list you create. There are a couple of things worth noting:</p>
+  <ul>
+    <li>The list is case insensitive: Donald will match Donald and donald.</li>
+    <li>It can match parts of words: Ann will also match annex, annoy and annual.</li>
+    <li>Phrases can be used: 'Donald Trump' will not match 'Donald Duck'.</li>
+    <li><a href="https://en.wikipedia.org/wiki/Regular_expression">Regular expressions</a> are supported. So you can say 'd.*p' to ban everything starting with a d followed by any characters followed by a p &mdash; 'Damp', 'Donald Trump' and 'It&#8217;s a dangerous trap' would all be matched.</li>
+  </ul>
+  <h2>Actions</h2>
+  <p>There are four actions that can be taken with tweets that contain twats:</p>
+  <ul>
+    <li>Remove: This completely removes the offending tweet.</li>
+    <li>Fortune: This replaces the tweet with a quotation from the fortune database.</li>
+    <li>Haiku: Replaces the tweet with a randomly generated haiku poem.</li>
+    <li>Kitten: Replaces the tweet with a kitten gif :).</li>
+  </ul>
+</body>
+</html>
