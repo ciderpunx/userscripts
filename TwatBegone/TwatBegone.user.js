@@ -4,12 +4,13 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.45
+// @version     0.46
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
+// @resource    helpPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/helpPage.html
 // @resource    kittehs https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/kittehs.txt
 // @resource    haiku https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt
 // @connect     helloacm.com
@@ -38,6 +39,9 @@ if(   document.location.href.indexOf("https://twitter.com/?twatconf") > -1
   initTwats();
   initAction();
 }
+else if(   document.location.href.indexOf("https://twitter.com/?twathelp") > -1) {
+  showHelpPage();
+}
 else {
   window.addEventListener('load', showIndicator, false);
   //showIndicator();
@@ -59,7 +63,10 @@ else {
 function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
   addSubmitListener();
-  //addShowUnimplementedListener();
+}
+
+function showHelpPage() {
+  document.documentElement.innerHTML = GM_getResourceText("helpPage");
 }
 
 function initAction() {
