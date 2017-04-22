@@ -9,8 +9,10 @@
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
 // @grant       GM_setValue
+// @grant       GM_addStyle
 // @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
 // @resource    helpPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/helpPage.html
+// @resource    css https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/style.css
 // @resource    kittehs https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/kittehs.txt
 // @resource    haiku https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt
 // @connect     helloacm.com
@@ -32,15 +34,19 @@ var fortuneServerTimeout = 800;
 
 var bsString = 'This tweet was bullshit.';
 
+var css = GM_getResourceText('css');
+
 if(   document.location.href.indexOf("https://twitter.com/?twatconf") > -1
    || document.location.href.indexOf("https://twitter.com/?twats=") > -1
    ) {
   showConfigPage();
+  GM_addStyle(css);
   initTwats();
   initAction();
 }
 else if(   document.location.href.indexOf("https://twitter.com/?twathelp") > -1) {
   showHelpPage();
+  GM_addStyle(css);
 }
 else {
   window.addEventListener('load', showIndicator, false);
