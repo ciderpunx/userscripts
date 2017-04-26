@@ -4,7 +4,7 @@
 // @namespace   ox4
 // @description Removes twats and all mentions of them from twitter
 // @include     https://twitter.com/*
-// @version     0.49
+// @version     0.491
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -96,6 +96,7 @@ function setTwats(twats){
 
 // Given a string of twats, 1 per line, filter out any empty lines
 function cleanTwats(twats) {
+  twats = twats + ''; // stringify twats, makes chrome happy
   return twats.split("\n").filter(nonempty).join("\n");
 }
 
