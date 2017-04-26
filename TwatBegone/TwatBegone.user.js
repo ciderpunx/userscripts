@@ -68,6 +68,7 @@ else {
 
 function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
+  initTwats();
   addSubmitListener();
 }
 
