@@ -1,4 +1,4 @@
-// ==UserScript==
+﻿// ==UserScript==
 // @name        TwatBegone
 // @author      Charlie Harvey and Graham Gillions
 // @namespace   ox4
@@ -95,7 +95,7 @@ function setTwats(twats){
 
 // Given a string of twats, 1 per line, filter out any empty lines
 function cleanTwats(twats) {
-  return twats.split("\n").filter(nonempty).join("\n")
+  return twats.split("\n").filter(nonempty).join("\n");
 }
 
 function setAction(action){
@@ -151,9 +151,9 @@ function twatFortune() {
                             .replace(/\\n/g,'<br />')
                             .replace(/\\t/g,' &nbsp; &nbsp;')
                             .replace(/\\/g,'');
-          tweet.innerHTML = textTweet('Here is your fortune instead.', fortune)
+          tweet.innerHTML = textTweet('Here is your fortune instead.', fortune);
         }
-      })
+      });
     }, true);
 }
 
@@ -188,8 +188,8 @@ function twatProcess(action, firstCall, destructiveUpdate) {
       if(e.keyCode==190) { // i.e. '.' for refresh
         twatProcess(action, false );
       }
-    }
-    delayedCalls(function(){twatProcess(action)}, false);
+    };
+    delayedCalls(function(){twatProcess(action);}, false);
   }
 
   for (var i=0; i<=tweets.length; i++) {
