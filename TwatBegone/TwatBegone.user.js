@@ -19,10 +19,10 @@
 // ==/UserScript==
 
 var defaultTwats = [ "realDonaldTrump"
-               , "Nigel_Farage"
-               , "KTHopkins"
-               , "piersmorgan"
-               ];
+                   , "Nigel_Farage"
+                   , "KTHopkins"
+                   , "piersmorgan"
+                   ];
 
 var kittehs = GM_getResourceText("kittehs").split("\n");
 
