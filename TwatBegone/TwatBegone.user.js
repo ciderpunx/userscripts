@@ -1,15 +1,20 @@
 ﻿// ==UserScript==
 // @name        TwatBegone
 // @author      Charlie Harvey and Graham Gillions
+// @copyright   2017, Charlie Harvey and Graham Gillions (https://charlieharvey.org.uk, http://oxguin.net)
 // @namespace   ox4
+// @icon        https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_normal.jpg
 // @description Removes twats and all mentions of them from twitter
+// @homePageURL http://twatbegone.com
+// @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.493
+// @version     0.5
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
 // @grant       GM_setValue
 // @grant       GM_addStyle
+// @license     GNU General Public License v3.0; https://www.gnu.org/licenses/gpl-3.0.en.html
 // @resource    configPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/configPage.html
 // @resource    helpPage https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/helpPage.html
 // @resource    css https://raw.githubusercontent.com/ciderpunx/userscripts/master/TwatBegone/style.css
