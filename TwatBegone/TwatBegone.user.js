@@ -8,7 +8,7 @@
 // @homePageURL http://twatbegone.com
 // @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.5.2
+// @version     0.5.3
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -47,17 +47,12 @@ if(   document.location.href.indexOf("https://twitter.com/?twatconf") > -1
    || document.location.href.indexOf("https://twitter.com/?twats=") > -1
    ) {
   showConfigPage();
-  GM_addStyle(css);
-  initTwats();
-  initAction();
 }
-else if(   document.location.href.indexOf("https://twitter.com/?twathelp") > -1) {
+else if( document.location.href.indexOf("https://twitter.com/?twathelp") > -1) {
   showHelpPage();
-  GM_addStyle(css);
 }
 else {
   window.addEventListener('load', showIndicator, false);
-  //showIndicator();
   var action = GM_getValue("action", "TwatBegone");
   if (action=="Fortune") {
     twatFortune();
@@ -76,13 +71,16 @@ else {
 function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
   initTwats();
+  initAction();
   showVersion();
   addSubmitListener();
+  GM_addStyle(css);
 }
 
 function showHelpPage() {
   document.documentElement.innerHTML = GM_getResourceText("helpPage");
   showVersion();
+  GM_addStyle(css);
 }
 
 function showVersion() {
@@ -91,12 +89,14 @@ function showVersion() {
 }
 
 function initAction() {
-  document.getElementById('action').value = GM_getValue("action", "TwatBegone");
+  var action = GM_getValue("action", "TwatBegone");
+  document.getElementById('action').value = action;
   setAction(action);
 }
 
 function initTwats() {
-  document.getElementById('twats').value = cleanTwats(GM_getValue("twats", defaultTwats.join("\n")));
+  var twats = cleanTwats(GM_getValue("twats", defaultTwats.join("\n")));
+  document.getElementById('twats').value = twats;
   setTwats(twats);
 }
 
