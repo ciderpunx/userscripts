@@ -8,7 +8,7 @@
 // @homePageURL http://twatbegone.com
 // @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.5.3
+// @version     0.5.4
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -43,16 +43,22 @@ var bsString = 'This tweet was bullshit.';
 
 var css = GM_getResourceText('css');
 
-if(   document.location.href.indexOf("https://twitter.com/?twatconf") > -1
-   || document.location.href.indexOf("https://twitter.com/?twats=") > -1
-   ) {
+if( pageIs("twatconf") || pageIs("twats=") ) {
   showConfigPage();
 }
-else if( document.location.href.indexOf("https://twitter.com/?twathelp") > -1) {
+else if( pageIs("twathelp") ) {
   showHelpPage();
 }
 else {
   window.addEventListener('load', showIndicator, false);
+  takeAction();
+}
+
+function pageIs(path) {
+  return document.location.href.indexOf('https://twitter.com/?' + path) > -1;
+}
+
+function takeAction() {
   var action = GM_getValue("action", "TwatBegone");
   if (action=="Fortune") {
     twatFortune();
