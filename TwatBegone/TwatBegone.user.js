@@ -8,7 +8,7 @@
 // @homePageURL http://twatbegone.com
 // @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.5.1
+// @version     0.5.2
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -28,6 +28,8 @@ var defaultTwats = [ "realDonaldTrump"
                    , "KTHopkins"
                    , "piersmorgan"
                    ];
+
+var version = GM_info.script.version; 
 
 var kittehs = GM_getResourceText("kittehs").split("\n");
 
@@ -74,11 +76,18 @@ else {
 function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
   initTwats();
+  showVersion();
   addSubmitListener();
 }
 
 function showHelpPage() {
   document.documentElement.innerHTML = GM_getResourceText("helpPage");
+  showVersion();
+}
+
+function showVersion() {
+  document.getElementById('version').innerHTML =
+    "This is TwatBegone version " + version;
 }
 
 function initAction() {
