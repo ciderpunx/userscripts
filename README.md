@@ -1,6 +1,6 @@
 # UserScripts
 
-A collection (well, one so far) of (very alpha) userscripts for
-[GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)
+A collection (well, one so far) of userscripts for
+[GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) and [Tampermonkey](http://tampermonkey.net/)
 
-* TwatBegone - will eventually somehow make @realDonaldTrump disappear from one's Twitter.
+* [TwatBegone](http://twatbegone.com) - removes twats and all mention of them from your twitter timeline and notifications.
