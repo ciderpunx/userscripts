@@ -9,4 +9,4 @@ p,h1,h2,h3 {padding-left:1rem}
 #topbar a:hover {text-decoration:underline}
 #logo {float:right;width:8em;margin-left:1em;padding-top:0.86em}
 #twats {width:99%;max-width:60em;height:21em}
-#info {background-color:#ffb;padding:5px;width:25em;font-weight:bold;display:none}
+#info {background-color:#ffb;padding:5px;width:16em;margin:auto;text-align:center;font-weight:bold;display:none}

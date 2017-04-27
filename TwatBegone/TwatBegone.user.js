@@ -8,7 +8,7 @@
 // @homePageURL http://twatbegone.com
 // @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.5
+// @version     0.5.1
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -118,7 +118,7 @@ function updateSettings() {
    var d = new Date();
    var info = document.getElementById('info');
    info.innerHTML = "Settings updated at: " + d.toTimeString().replace(/\s.*/,'');
-   info.style.display="inline";
+   info.style.display="block";
 }
 
 // Makes a little fixed div at the bottom right with a link to the config page, so ppl know TwatBegone is running
