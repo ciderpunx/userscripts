@@ -138,12 +138,12 @@ function setAction(action){
 
 // Called when user clicks updateSettings button on config page
 function updateSettings() {
-   setTwats(document.getElementById('twats').value);
-   setAction(document.getElementById('action').value);
-   var d = new Date();
-   var info = document.getElementById('info');
-   info.innerHTML = "Settings updated at: " + d.toTimeString().replace(/\s.*/,'');
-   info.style.display="block";
+  setTwats(document.getElementById('twats').value);
+  setAction(document.getElementById('action').value);
+  var d = new Date();
+  var info = document.getElementById('info');
+  info.innerHTML = "Settings updated at: " + d.toTimeString().replace(/\s.*/,'');
+  info.style.display="block";
 }
 
 // Makes a little fixed div at the bottom right with a link to the config page, so ppl know TwatBegone is running
@@ -173,50 +173,50 @@ function twatToKitteh() {
 
 // Action: replace with fortune from the server
 function twatFortune() {
-    twatProcess (function(tweet) {
-      var fortune = "cannot load fortune";
-      GM_xmlhttpRequest({
-        method: "GET",
-        url: fortuneServerURL,
-        timeout: fortuneServerTimeout,
-        onload: function(response) {
-          fortune = response.responseText
-                            .replace(/["]/g,'')
-                            .replace(/\\n/g,'<br />')
-                            .replace(/\\t/g,' &nbsp; &nbsp;')
-                            .replace(/\\/g,'');
-          tweet.innerHTML = textTweet('Here is your fortune instead.', fortune);
-        }
-      });
-    }, true);
+  twatProcess (function(tweet) {
+    var fortune = "cannot load fortune";
+    GM_xmlhttpRequest({
+      method: "GET",
+      url: fortuneServerURL,
+      timeout: fortuneServerTimeout,
+      onload: function(response) {
+        fortune = response.responseText
+                          .replace(/["]/g,'')
+                          .replace(/\\n/g,'<br />')
+                          .replace(/\\t/g,' &nbsp; &nbsp;')
+                          .replace(/\\/g,'');
+        tweet.innerHTML = textTweet('Here is your fortune instead.', fortune);
+      }
+    });
+  }, true);
 }
 
 // Action: replace with Haiku
 function twatHaiku() {
-    twatProcess (function(tweet) {
-      var haiku = "cannot compose haiku";
-      haiku = makeHaiku();
-      tweet.innerHTML =
-          textTweet( 'Here&#8217;s a haiku made of words from <a href="https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt">these ones</a>.'
-                   , haiku
-                   );
-    }, true);
+  twatProcess (function(tweet) {
+    var haiku = "cannot compose haiku";
+    haiku = makeHaiku();
+    tweet.innerHTML =
+        textTweet( 'Here&#8217;s a haiku made of words from <a href="https://raw.githubusercontent.com/herval/haikuzao/master/inputs/haiku.txt">these ones</a>.'
+                 , haiku
+                 );
+  }, true);
 }
 
 // Set the bsString
 function randBsString() {
-    var bsString = bsStrings[Math.floor(Math.random() * bsStrings.length)];
-    return bsString;
+  var bsString = bsStrings[Math.floor(Math.random() * bsStrings.length)];
+  return bsString;
 }
 // Given a title and a text, return something that can be used as a tweet, at least on desktop.
 function textTweet(title, txt) {
-      return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
-             , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
-             , '<p style="margin-left:70px"><strong>' + randBsString() + '</strong> '
-             , '<span style="color:#657786">' + title + '</span></p>'
-             , '<p style="margin-left:70px">' + txt + '</p>'
-             , '<p><span style="margin-left: 70px; color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <span style="color:#000fb3"><a href="https://twitter.com/TwatBegone">@TwatBegone</a></span> : <span style="color:#000fb3"><a href="https://t.co/3dgqeFp3uy">TwatBegone.com</a></span></span></p>'
-             ].join('');
+  return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
+         , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
+         , '<p style="margin-left:70px"><strong>' + randBsString() + '</strong> '
+         , '<span style="color:#657786">' + title + '</span></p>'
+         , '<p style="margin-left:70px">' + txt + '</p>'
+         , '<p><span style="margin-left: 70px; color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <span style="color:#000fb3"><a href="https://twitter.com/TwatBegone">@TwatBegone</a></span> : <span style="color:#000fb3"><a href="https://t.co/3dgqeFp3uy">TwatBegone.com</a></span></span></p>'
+         ].join('');
 }
 
 // Take a function and apply it to any tweets that match one of the current twats
@@ -306,61 +306,60 @@ function getWordOfSyllables(x) {
 // Syllable counting machinery based on Perl's Lingua::EN:Syllable
 // Far from entirely accurate.
 function syllable(word) {
-    var scrugg = [];
-    var syl = 0;
-    var subSyl = [ 'cial'
-                 , 'tia'
-                 , 'cius'
-                 , 'cious'
-                 , 'giu'  // belgium!
-                 , 'ion'
-                 , 'iou'
-                 , 'sia$'
-                 , '.ely$' // absolutely! (but not ely!)
-                 ];
-    var addSyl = [ 'ia'
-                 , 'riet'
-                 , 'dien'
-                 , 'iu'
-                 , 'io'
-                 , 'ii'
-                 , '[aeiouym]bl$'    // -Vble, plus -mble
-                 , '[aeiou]{3}'      // agreeable
-                 , '^mc'
-                 , 'ism$'            // -isms
-                 , '([^aeiouy])\1l$' // middle twiddle battle bottle, etc.
-                 , '[^l]lien'        // alien, salient [1]
-                 ,'^coa[dglx].'      // [2]
-                 , '[^gq]ua[^auieo]' // i think this fixes more than it breaks
-                 , 'dnt$'            // couldn't
-                 ];
+  var scrugg = [];
+  var syl = 0;
+  var subSyl = [ 'cial'
+               , 'tia'
+               , 'cius'
+               , 'cious'
+               , 'giu'  // belgium!
+               , 'ion'
+               , 'iou'
+               , 'sia$'
+               , '.ely$' // absolutely! (but not ely!)
+               ];
+  var addSyl = [ 'ia'
+               , 'riet'
+               , 'dien'
+               , 'iu'
+               , 'io'
+               , 'ii'
+               , '[aeiouym]bl$'    // -Vble, plus -mble
+               , '[aeiou]{3}'      // agreeable
+               , '^mc'
+               , 'ism$'            // -isms
+               , '([^aeiouy])\1l$' // middle twiddle battle bottle, etc.
+               , '[^l]lien'        // alien, salient [1]
+               ,'^coa[dglx].'      // [2]
+               , '[^gq]ua[^auieo]' // i think this fixes more than it breaks
+               , 'dnt$'            // couldn't
+               ];
 
-    word = word.toLowerCase();
-    word = word.replace(/\'/g,''); // fold contractions.  not very effective.
-    word = word.replace(/e$/,'');  // trailing e
-    scrugg = word.split(/[^aeiouy]+/); // '-' should perhaps be added?
-    //shift(@scrugg) unless ($scrugg[0]);
-    if (scrugg.length > 1) {
-      scrugg.shift();
+  word = word.toLowerCase();
+  word = word.replace(/\'/g,''); // fold contractions.  not very effective.
+  word = word.replace(/e$/,'');  // trailing e
+  scrugg = word.split(/[^aeiouy]+/); // '-' should perhaps be added?
+  //shift(@scrugg) unless ($scrugg[0]);
+  if (scrugg.length > 1) {
+    scrugg.shift();
+  }
+  for (var i=0; i<subSyl.length; i++) {
+    if(word.match(new RegExp(subSyl[i]))) {
+      syl--;
     }
-    for (var i=0; i<subSyl.length; i++) {
-      if(word.match(new RegExp(subSyl[i]))) {
-        syl--;
-      }
-    }
-    for(var i=0; i<addSyl.length; i++) {
-      if(word.match(new RegExp(addSyl[i]))) {
-        syl++;
-      }
-    }
-    if (word.length==1) {
+  }
+  for(var i=0; i<addSyl.length; i++) {
+    if(word.match(new RegExp(addSyl[i]))) {
       syl++;
     }
-    // count vowel groupings
-    syl += scrugg.length;
-    if (syl==0) {
-      syl=1;
-    }
-    return syl;
+  }
+  if (word.length==1) {
+    syl++;
+  }
+  // count vowel groupings
+  syl += scrugg.length;
+  if (syl==0) {
+    syl=1;
+  }
+  return syl;
 }
-
