@@ -200,7 +200,7 @@ function textTweet(title, txt) {
              , '<p style="margin-left:70px"><strong>' + bsString + '</strong> '
              , '<span style="color:#657786">' + title + '</span></p>'
              , '<p style="margin-left:70px">' + txt + '</p>'
-             , '<p><span style="margin-left: 70px; color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <a href="https://twitter.com/TwatBegone">@TwatBegone</a>. <a href="https://t.co/3dgqeFp3uy">TwatBegone.com</a></span></p>'
+             , '<p><span style="margin-left: 70px; color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <span style="color:#000fb3"><a href="https://twitter.com/TwatBegone">@TwatBegone</a></span> : <span style="color:#000fb3"><a href="https://t.co/3dgqeFp3uy">TwatBegone.com</a></span></span></p>'
              ].join('');
 }
 
