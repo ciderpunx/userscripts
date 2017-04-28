@@ -199,7 +199,8 @@ function textTweet(title, txt) {
              , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
              , '<p style="margin-left:70px"><strong>' + bsString + '</strong> '
              , '<span style="color:#657786">' + title + '</span></p>'
-             , '<p style="margin-left:70px">' + txt + "</p>"
+             , '<p style="margin-left:70px">' + txt + '</p>'
+             , '<p><span style="margin-left: 70px; color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <a href="https://twitter.com/TwatBegone">@TwatBegone</a>. <a href="https://t.co/3dgqeFp3uy">TwatBegone.com</a></span></p>'
              ].join('');
 }
 
