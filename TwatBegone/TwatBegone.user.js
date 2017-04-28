@@ -39,7 +39,17 @@ var fortuneServerURL = "https://helloacm.com/api/fortune/";
 
 var fortuneServerTimeout = 800;
 
-var bsString = 'This tweet was bullshit.';
+var bsStrings = [ "This tweet was bullshit."
+	              , "Begone twat."
+	              , "Tweet removed by the taste police."
+	              , "Yuck. Horrible twat removed."
+	              , "A twat on your TL! Moving on ..."
+	              , "Look over there *points*. *replaces tweet*."
+	              , "Yikes! That tweet was awful."
+	              , "No need to see that tweet."
+	              , "This was not the tweet you were looking for."
+	              , "No, no, no."
+                ];
 
 var css = GM_getResourceText('css');
 
@@ -193,11 +203,16 @@ function twatHaiku() {
     }, true);
 }
 
+// Set the bsString
+function randBsString() {
+	  var bsString = bsStrings[Math.floor(Math.random() * bsStrings.length)];
+	  return bsString;
+}
 // Given a title and a text, return something that can be used as a tweet, at least on desktop.
 function textTweet(title, txt) {
       return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
              , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
-             , '<p style="margin-left:70px"><strong>' + bsString + '</strong> '
+             , '<p style="margin-left:70px"><strong>' + randBsString() + '</strong> '
              , '<span style="color:#657786">' + title + '</span></p>'
              , '<p style="margin-left:70px">' + txt + '</p>'
              , '<p><span style="margin-left: 70px; color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <span style="color:#000fb3"><a href="https://twitter.com/TwatBegone">@TwatBegone</a></span> : <span style="color:#000fb3"><a href="https://t.co/3dgqeFp3uy">TwatBegone.com</a></span></span></p>'
