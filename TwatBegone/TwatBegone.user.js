@@ -40,15 +40,15 @@ var fortuneServerURL = "https://helloacm.com/api/fortune/";
 var fortuneServerTimeout = 800;
 
 var bsStrings = [ "This tweet was bullshit."
-	              , "Begone twat."
-	              , "Tweet removed by the taste police."
-	              , "Yuck. Horrible twat removed."
-	              , "A twat on your TL! Moving on ..."
-	              , "Look over there *points*. *replaces tweet*."
-	              , "Yikes! That tweet was awful."
-	              , "No need to see that tweet."
-	              , "This was not the tweet you were looking for."
-	              , "No, no, no."
+                , "Begone twat."
+                , "Tweet removed by the taste police."
+                , "Yuck. Horrible twat removed."
+                , "A twat on your TL! Moving on ..."
+                , "Look over there *points*. *replaces tweet*."
+                , "Yikes! That tweet was awful."
+                , "No need to see that tweet."
+                , "This was not the tweet you were looking for."
+                , "No, no, no."
                 ];
 
 var css = GM_getResourceText('css');
@@ -205,8 +205,8 @@ function twatHaiku() {
 
 // Set the bsString
 function randBsString() {
-	  var bsString = bsStrings[Math.floor(Math.random() * bsStrings.length)];
-	  return bsString;
+    var bsString = bsStrings[Math.floor(Math.random() * bsStrings.length)];
+    return bsString;
 }
 // Given a title and a text, return something that can be used as a tweet, at least on desktop.
 function textTweet(title, txt) {
