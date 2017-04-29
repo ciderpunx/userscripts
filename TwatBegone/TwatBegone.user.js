@@ -52,16 +52,16 @@ var bsStrings = [ "This tweet was bullshit."
                 ];
 
 var twatAvis = [ "https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg"
-                ,"https://pbs.twimg.com/media/C-gqTyXXYAAf-WA.jpg"
-                ,"https://pbs.twimg.com/media/C-gqU0WXcAIXJoj.jpg"
-                ,"https://pbs.twimg.com/media/C-gqW3EW0AUCHNz.jpg"
-                ,"https://pbs.twimg.com/media/C-gqXq4XcAU-sQ6.jpg"
-                ,"https://pbs.twimg.com/media/C-gqb1yWsAAFSmr.jpg"
-                ,"https://pbs.twimg.com/media/C-gqeSNW0AEdI7G.jpg"
-                ,"https://pbs.twimg.com/media/C-gqfWvXkAAzyVN.jpg"
-                ,"https://pbs.twimg.com/media/C-gqgKHW0AIvi4I.jpg"
-                ,"https://pbs.twimg.com/media/C-gqjQJW0AAR_ar.jpg"
-                ];
+               ,"https://pbs.twimg.com/media/C-gqTyXXYAAf-WA.jpg"
+               ,"https://pbs.twimg.com/media/C-gqU0WXcAIXJoj.jpg"
+               ,"https://pbs.twimg.com/media/C-gqW3EW0AUCHNz.jpg"
+               ,"https://pbs.twimg.com/media/C-gqXq4XcAU-sQ6.jpg"
+               ,"https://pbs.twimg.com/media/C-gqb1yWsAAFSmr.jpg"
+               ,"https://pbs.twimg.com/media/C-gqeSNW0AEdI7G.jpg"
+               ,"https://pbs.twimg.com/media/C-gqfWvXkAAzyVN.jpg"
+               ,"https://pbs.twimg.com/media/C-gqgKHW0AIvi4I.jpg"
+               ,"https://pbs.twimg.com/media/C-gqjQJW0AAR_ar.jpg"
+               ];
 
 var css = GM_getResourceText('css');
 
