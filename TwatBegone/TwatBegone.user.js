@@ -29,7 +29,7 @@ var defaultTwats = [ "realDonaldTrump"
                    , "piersmorgan"
                    ];
 
-var version = GM_info.script.version; 
+var version = GM_info.script.version;
 
 var kittehs = GM_getResourceText("kittehs").split("\n");
 
@@ -100,6 +100,7 @@ function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
   initTwats();
   initAction();
+  initRainbowAvis();
   showVersion();
   addSubmitListener();
   GM_addStyle(css);
@@ -128,12 +129,27 @@ function initTwats() {
   setTwats(twats);
 }
 
+function initRainbowAvis() {
+  var rainbowAvis = GM_getValue("rainbowAvis", true);
+
+  document.getElementById('rainbowAvis').value = rainbowAvis ? "Enabled" : "Disabled";
+  addRainbowAviToggleListener(); // Apparently checkboxes don't work :-(((
+  setRainbowAvis(rainbowAvis);
+}
+
 function addSubmitListener() {
   document.getElementById("submit").addEventListener('click',updateSettings,false);
 }
 
+function addRainbowAviToggleListener() {
+  var ra = document.getElementById("rainbowAvis");
+  ra.addEventListener('click', function(){
+    this.value = this.value == 'Enabled' ? 'Disabled' : 'Enabled';
+  }, true);
+}
+
 function setTwats(twats){
-  GM_setValue("twats",cleanTwats(twats));
+  GM_setValue("twats", cleanTwats(twats));
 }
 
 // Given a string of twats, 1 per line, filter out any empty lines
@@ -148,14 +164,19 @@ function setAction(action){
   GM_setValue("action",action);
 }
 
+function setRainbowAvis(rainbowAvis){
+  GM_setValue("rainbowAvis",rainbowAvis);
+}
+
 // Called when user clicks updateSettings button on config page
 function updateSettings() {
   setTwats(document.getElementById('twats').value);
   setAction(document.getElementById('action').value);
+  setRainbowAvis(document.getElementById('rainbowAvis').value == 'Enabled');
   var d = new Date();
   var info = document.getElementById('info');
   info.innerHTML = "Settings updated at: " + d.toTimeString().replace(/\s.*/,'');
-  info.style.display="block";
+  info.style.display = "block";
 }
 
 // Makes a little fixed div at the bottom right with a link to the config page, so ppl know TwatBegone is running
@@ -215,9 +236,14 @@ function twatHaiku() {
   }, true);
 }
 // Set the avi
-function randAvi() {
-	  var twatAvi = twatAvis[Math.floor(Math.random() * twatAvis.length)];
-	  return twatAvi;
+function getAvi() {
+  var rainbowAvis = GM_getValue("rainbowAvis",true);
+  if (rainbowAvis) {
+    return twatAvis[Math.floor(Math.random() * twatAvis.length)];
+  }
+  else {
+    return twatAvis[0];
+  }
 }
 // Set the bsString
 function randBsString() {
@@ -227,7 +253,7 @@ function randBsString() {
 // Given a title and a text, return something that can be used as a tweet, at least on desktop.
 function textTweet(title, txt) {
   return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
-         , '<img class="avatar" style="float:left;margin-left:12px" src="' + randAvi() + '" alt="TBG" />'
+         , '<img class="avatar" style="float:left;margin-left:12px" src="' + getAvi() + '" alt="TBG" />'
          , '<p style="margin-left:70px"><strong>' + randBsString() + '</strong> '
          , '<span style="color:#657786">' + title + '</span></p>'
          , '<div style="margin-left:70px"><p>' + txt + '</p>'

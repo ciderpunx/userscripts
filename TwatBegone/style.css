@@ -4,6 +4,8 @@ p,h1,h2,h3 {padding-left:1rem}
 #submit:hover {background-color: #900}
 .nav {list-style-type:none; padding-top:1.6em}
 .nav li {display: block; float: left; text-align:center; width: 100px; margin-right: 20px}
+.toggle {background-color: #55acee;border: none; padding: 5px; color: #fff; font-weight: 900; border-radius: 5px;}
+.toggle:hover {background-color: #449bdd}
 #topbar {background-color:#000; color:#fff; height:10em; padding:1em}
 #topbar a, #topbar a:visited {color:#fed136; text-decoration:none}
 #topbar a:hover {text-decoration:underline}
