@@ -51,6 +51,18 @@ var bsStrings = [ "This tweet was bullshit."
                 , "No, no, no."
                 ];
 
+var twatAvis = [ "https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg"
+                ,"https://pbs.twimg.com/media/C-gqTyXXYAAf-WA.jpg"
+                ,"https://pbs.twimg.com/media/C-gqU0WXcAIXJoj.jpg"
+                ,"https://pbs.twimg.com/media/C-gqW3EW0AUCHNz.jpg"
+                ,"https://pbs.twimg.com/media/C-gqXq4XcAU-sQ6.jpg"
+                ,"https://pbs.twimg.com/media/C-gqb1yWsAAFSmr.jpg"
+                ,"https://pbs.twimg.com/media/C-gqeSNW0AEdI7G.jpg"
+                ,"https://pbs.twimg.com/media/C-gqfWvXkAAzyVN.jpg"
+                ,"https://pbs.twimg.com/media/C-gqgKHW0AIvi4I.jpg"
+                ,"https://pbs.twimg.com/media/C-gqjQJW0AAR_ar.jpg"
+                ];
+
 var css = GM_getResourceText('css');
 
 if( pageIs("twatconf") || pageIs("twats=") ) {
@@ -202,7 +214,11 @@ function twatHaiku() {
                  );
   }, true);
 }
-
+// Set the avi
+function randAvi() {
+	  var twatAvi = twatAvis[Math.floor(Math.random() * twatAvis.length)];
+	  return twatAvi;
+}
 // Set the bsString
 function randBsString() {
   var bsString = bsStrings[Math.floor(Math.random() * bsStrings.length)];
@@ -211,11 +227,11 @@ function randBsString() {
 // Given a title and a text, return something that can be used as a tweet, at least on desktop.
 function textTweet(title, txt) {
   return [ '<div style="border-bottom:1px solid #eee;padding:1em 0">'
-         , '<img class="avatar" style="float:left;margin-left:12px" src="https://pbs.twimg.com/profile_images/850405364067688448/3x0b2zmz_bigger.jpg" alt="TBG" />'
+         , '<img class="avatar" style="float:left;margin-left:12px" src="' + randAvi() + '" alt="TBG" />'
          , '<p style="margin-left:70px"><strong>' + randBsString() + '</strong> '
          , '<span style="color:#657786">' + title + '</span></p>'
-         , '<p style="margin-left:70px">' + txt + '</p>'
-         , '<p><span style="margin-left: 70px; color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <span style="color:#000fb3"><a href="https://twitter.com/TwatBegone">@TwatBegone</a></span> : <span style="color:#000fb3"><a href="https://t.co/3dgqeFp3uy">TwatBegone.com</a></span></span></p>'
+         , '<div style="margin-left:70px"><p>' + txt + '</p>'
+         , '<p><span style="color:#657786; font-size:80%">A Much Nicer Twitter&#8482; brought to you by <span style="color:#000fb3"><a href="https://twitter.com/TwatBegone">@TwatBegone</a></span> : <a style="color:#000fb3" href="http://twatbegone.com">TwatBegone.com</a></span></p></div>'
          ].join('');
 }
 
