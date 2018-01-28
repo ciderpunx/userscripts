@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name        TwatBegone
 // @author      Charlie Harvey and Graham Gillions
 // @copyright   2017, Charlie Harvey and Graham Gillions (https://charlieharvey.org.uk, http://oxguin.net)
@@ -8,7 +8,7 @@
 // @homePageURL http://twatbegone.com
 // @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.5.5
+// @version     0.5.6
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -73,11 +73,24 @@ else if( pageIs("twathelp") ) {
 }
 else {
   window.addEventListener('load', showIndicator, false);
+  hideRecommends();
   takeAction();
 }
 
 function pageIs(path) {
   return document.location.href.indexOf('https://twitter.com/?' + path) > -1;
+}
+
+function hideGenericTwets() {
+  var hideFlag = GM_getValue("hideGenericTweets", "TwatBegone");
+
+  if(hideFlag){
+    var es = document.getElementsByClassName('js-activity-generic');
+    console.log("in hr");
+    for(var i =0; i<es.length; i++) {
+        es[i].style.display='none';
+    }
+  }
 }
 
 function takeAction() {
@@ -137,12 +150,27 @@ function initRainbowAvis() {
   setRainbowAvis(rainbowAvis);
 }
 
+function initHideGenericTweets() {
+  var hideGenericTweets = GM_getValue("hideGenericTweets", true);
+
+  document.getElementById('hideGenericTweets').value = hideGenericTweets ? "Enabled" : "Disabled";
+  addHideGenericTweetsToggleListener();
+  setHideGenericTweets(hideGenericTweets);
+}
+
 function addSubmitListener() {
   document.getElementById("submit").addEventListener('click',updateSettings,false);
 }
 
 function addRainbowAviToggleListener() {
   var ra = document.getElementById("rainbowAvis");
+  ra.addEventListener('click', function(){
+    this.value = this.value == 'Enabled' ? 'Disabled' : 'Enabled';
+  }, true);
+}
+
+function addHideGenericTweetsToggleListener() {
+  var ra = document.getElementById("hideGenericTweets");
   ra.addEventListener('click', function(){
     this.value = this.value == 'Enabled' ? 'Disabled' : 'Enabled';
   }, true);
@@ -167,6 +195,11 @@ function setAction(action){
 function setRainbowAvis(rainbowAvis){
   GM_setValue("rainbowAvis",rainbowAvis);
 }
+
+function setRainbowAvis(hideGenericTweets){
+  GM_setValue("hideGenericTweets",hideGenericTweets);
+}
+
 
 // Called when user clicks updateSettings button on config page
 function updateSettings() {
