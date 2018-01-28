@@ -8,7 +8,7 @@
 // @homePageURL http://twatbegone.com
 // @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.5.61
+// @version     0.5.63
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -111,13 +111,13 @@ function takeAction() {
 
 function showConfigPage() {
   document.documentElement.innerHTML = GM_getResourceText("configPage");
+  GM_addStyle(css);
   initTwats();
   initAction();
   initRainbowAvis();
   initHideGenericTweets();
   showVersion();
   addSubmitListener();
-  GM_addStyle(css);
 }
 
 function showHelpPage() {
@@ -197,7 +197,7 @@ function setRainbowAvis(rainbowAvis){
   GM_setValue("rainbowAvis",rainbowAvis);
 }
 
-function setRainbowAvis(hideGenericTweets){
+function setHideGenericTweets(hideGenericTweets){
   GM_setValue("hideGenericTweets",hideGenericTweets);
 }
 
@@ -207,6 +207,7 @@ function updateSettings() {
   setTwats(document.getElementById('twats').value);
   setAction(document.getElementById('action').value);
   setRainbowAvis(document.getElementById('rainbowAvis').value == 'Enabled');
+  setHideGenericTweets(document.getElementById('hideGenericTweets').value == 'Enabled');
   var d = new Date();
   var info = document.getElementById('info');
   info.innerHTML = "Settings updated at: " + d.toTimeString().replace(/\s.*/,'');
