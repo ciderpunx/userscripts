@@ -8,7 +8,7 @@
 // @homePageURL http://twatbegone.com
 // @supportURL  https://github.com/ciderpunx/userscripts/issues
 // @include     https://twitter.com/*
-// @version     0.5.6
+// @version     0.5.61
 // @grant       GM_getResourceText
 // @grant       GM_xmlhttpRequest
 // @grant       GM_getValue
@@ -73,7 +73,7 @@ else if( pageIs("twathelp") ) {
 }
 else {
   window.addEventListener('load', showIndicator, false);
-  hideRecommends();
+  hideGenericTweets();
   takeAction();
 }
 
@@ -81,7 +81,7 @@ function pageIs(path) {
   return document.location.href.indexOf('https://twitter.com/?' + path) > -1;
 }
 
-function hideGenericTwets() {
+function hideGenericTweets() {
   var hideFlag = GM_getValue("hideGenericTweets", "TwatBegone");
 
   if(hideFlag){
@@ -114,6 +114,7 @@ function showConfigPage() {
   initTwats();
   initAction();
   initRainbowAvis();
+  initHideGenericTweets();
   showVersion();
   addSubmitListener();
   GM_addStyle(css);
